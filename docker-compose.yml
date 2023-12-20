@@ -1,0 +1,48 @@
+version: '3.3'
+
+services:
+
+  wordpress:
+    image: wordpress
+    ports:
+      - 8080:80
+    depends_on:
+      - db
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: root
+      WORDPRESS_DB_PASSWORD: azertysio
+      WORDPRESS_DB_NAME: wordpress
+
+
+  db:
+
+    image: mariadb
+
+    restart: always
+
+    environment:
+
+      MARIADB_ROOT_PASSWORD: azertysio
+    
+    ports:
+      - 3308:3306
+
+
+  phpmyadmin:
+
+    image: phpmyadmin
+
+    restart: always
+
+    environment:
+
+      PMA_HOST: db
+
+      # PMA_USER: sio
+      # PMA_PASSWORD: azertysio
+
+    ports:
+
+      - 8081:80
+
